@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wander Who: Your Travel Consultant</title>
+
+<style>
+
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    @font-face {
+        font-family: "Neue Montreal Reg";
+        src: url(NeueMontreal-Regular.otf);
+    }
+
+    @font-face {
+        font-family: "Neue Montreal Bold";
+        src: url(NeueMontreal-Bold.otf);
+    }
+
+    @font-face {
+        font-family: "Neue Montreal Bold Italic";
+        src: url(NeueMontreal-BoldItalic.otf);
+    }
+
+    .nav {
+      position: fixed;
+      background-color: #b83d26;
+      top: 10px;
+      left:25%;
+      right: 25%;
+      width: 50%;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      border-radius: 25px;
+      z-index: 1;
+    }
+
+    .navtxt {
+        color: #ffcbc2;
+        padding: 16px 16px;
+        border-radius: 50px;
+        text-decoration: none;
+        transition: 0.5s;
+        font-family: "Neue Montreal Bold";
+    }
+
+    .navtxt a:hover {
+        background-color: #a5311c73;
+        color: #ffe6e2;
+        padding: 10px;
+        cursor: pointer;
+        font-size: 18px;
+    }
+
+    .navtxt a:visited, .navtxt a:link {
+        color: rgb(252, 213, 191);
+        padding: 16px 16px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.5s;
+        font-family: "Neue Montreal Bold";
+    }
+    
+    .navlogo {
+        transition: 0.5s;
+    }
+
+    .navlogo:hover {
+        scale: 105%;
+        cursor: pointer;
+        background-color: #135dac70;
+        padding: 1px 1px;
+        border-radius: 40px;
+        scale: 102%;
+    }
+
+.content {
+        display: grid;
+        margin: 90px auto auto auto;
+        width: 1380px;
+        grid-template-columns: 690px 690px;
+        grid-template-rows: 250px 15px 30px 160px 750px 750px 750px 750px 800px 750px 750px 750px 750px 750px 750px;
+        grid-template-areas: 
+        "header header"
+        "divider divider"
+        "text text"
+        "TLDR TLDR"
+        "body1 body1"
+        "body2 body2"
+        "body3 body3"
+        "body4 body4"
+        "body5 body5"
+        "body6 body6"
+        "body7 body7"
+        "body8 body8"
+        "body9 body9"
+        "body10 body10"
+        "body11 body11"
+        ;
+        row-gap: 20px;
+        column-gap: 15px;
+    }
+
+    .header {
+        display: flex;
+        grid-area: header;
+        overflow: hidden;
+        height: 250px;
+        border-radius: 25px;
+        background-image: url(hk\ header\ bg.png);
+        background-position: center 1310px;
+        background-size: 1400px;
+        position: relative;
+        flex-direction: row;
+        justify-content: space-between;
+        opacity: 0;
+        animation: fall 2s ease-out forwards;
+    }
+
+    @keyframes fall {
+        0% {
+            transform: translateY(-50px);
+            opacity: 0;
+        }
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes rise {
+        0% {
+            transform: translateY(-50px);
+            opacity: 0;
+            scale: 0;
+        }
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+            scale: 1;
+        }
+    }
+    
+    #hkboat {
+        position: relative;
+        width: auto;
+        height: 450px;
+        animation: slideUpPlane 1.8s ease-out forwards;
+        animation-range: entry 0;
+        right: 300px;
+    }
+
+    @keyframes slideUpPlane {
+        0% {
+            top: 300px;
+        }
+        100% {
+            top: -120px;
+        }
+    }
+    
+    .title {
+        font-family: "Neue Montreal Bold";
+        font-size: 60px;
+        margin-left: 100px;
+        width: 750px;
+        color: aliceblue;
+        -webkit-text-stroke: 3px #083D77;
+        animation: titleslideUp 1.5s ease-out forwards;
+        position: relative;
+        font-size: 100px;
+    }
+
+    @keyframes titleslideUp {
+        0% {
+            opacity: 0;
+            top: 100px;
+        }
+        100% {
+            opacity: 1;
+            top: 0px;
+        }
+    }
+
+    .subtitle {
+        font-family: "Neue Montreal Bold";
+        font-size: 30px;
+        margin-top: 40px;
+        margin-left: 100px;
+        color: #073668;
+        animation: subtitleslideUp 1s ease-out forwards;
+        position: relative;
+    }
+
+    @keyframes subtitleslideUp {
+        0% {
+            opacity: 0;
+            top: 50px;
+        }
+        100% {
+            opacity: 1;
+            top: 0px;
+        }
+    }
+
+    @keyframes descslideUp {
+        0% {
+            opacity: 0;
+            top: 100px;
+        }
+        100% {
+            opacity: 1;
+            top: 5px;
+        }
+    }
+
+    .divider {
+        grid-area: divider;
+        animation: openup 1s ease-out forwards;
+        animation-timeline: view();
+        animation-range: entry 0;
+    }
+
+    hr.rounded {
+        border-top: 2px solid #a5311c;
+        border-radius: 5px;
+        align-self: center;
+        transform-origin: center;
+        animation: openup 2s ease-out forwards;
+    }
+
+    @keyframes openup {
+        0% {
+            transform: scaleX(0);
+        }
+        100% {
+            transform: scaleX(0.9);
+        }   
+    }
+
+    @keyframes slideup {
+        0% {
+            opacity: 0;
+            top: 50px;
+
+        }
+        100% {
+            opacity: 1;
+            top: 0px;
+        }
+    }
+
+    .text {
+        grid-area: text;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+    }
+
+    .texttxt {
+        font-family: "Neue Montreal Bold Italic";
+        font-size: 23px;
+        align-items: center;
+        color:#073668;
+        position: relative;
+        animation: subtitleslideUp 1s ease-out forwards; 
+    }
+
+
+    .body2 {
+        display: flex;
+        grid-area: body2;
+        flex-direction: column;
+        gap: 10px;
+        animation: rise 1.5s ease-out forwards;
+        animation-timeline: view();
+        animation-range: entry 0;
+        overflow: hidden;
+        align-items: center;
+    }
+
+    .body3 {
+        display: flex;
+        grid-area: body3;
+        flex-direction: column;
+        gap: 10px;
+        animation: rise 1.5s ease-out forwards;
+        animation-timeline: view();
+        animation-range: entry 0;
+        overflow: hidden;
+        align-items: center;
+    }
+
+    .body4 {
+        display: flex;
+        grid-area: body4;
+        flex-direction: column;
+        gap: 10px;
+        animation: rise 1.5s ease-out forwards;
+        animation-timeline: view();
+        animation-range: entry 0;
+        align-items: center;
+        overflow: hidden;
+        align-items: center;
+    }
+
+    .body5 {
+        display: flex;
+        grid-area: body5;
+        flex-direction: column;
+        gap: 10px;
+        animation: rise 1.5s ease-out forwards;
+        animation-timeline: view();
+        animation-range: entry 0;
+        align-items: center;
+        overflow: hidden;
+        align-items: center;
+    }
+
+    .body6 {
+        display: flex;
+        grid-area: body6;
+        flex-direction: column;
+        gap: 10px;
+        animation: rise 1.5s ease-out forwards;
+        animation-timeline: view();
+        animation-range: entry 0;
+        align-items: center;
+        overflow: hidden;
+        align-items: center;
+    }
+
+    .body7 {
+        display: flex;
+        grid-area: body7;
+        flex-direction: column;
+        gap: 10px;
+        animation: rise 1.5s ease-out forwards;
+        animation-timeline: view();
+        animation-range: entry 0;
+        align-items: center;
+        overflow: hidden;
+        align-items: center;
+    }
+
+    .body8 {
+        display: flex;
+        grid-area: body8;
+        flex-direction: column;
+        gap: 10px;
+        animation: rise 1.5s ease-out forwards;
+        animation-timeline: view();
+        animation-range: entry 0;
+        align-items: center;
+        overflow: hidden;
+        align-items: center;
+    }
+
+    .body9 {
+        display: flex;
+        grid-area: body9;
+        flex-direction: column;
+        gap: 10px;
+        animation: rise 1.5s ease-out forwards;
+        animation-timeline: view();
+        animation-range: entry 0;
+        align-items: center;
+        overflow: hidden;
+        align-items: center;
+    }
+
+    .body10 {
+        display: flex;
+        grid-area: body10;
+        flex-direction: column;
+        gap: 10px;
+        animation: rise 1.5s ease-out forwards;
+        animation-timeline: view();
+        animation-range: entry 0;
+        align-items: center;
+        overflow: hidden;
+        align-items: center;
+    }
+
+    .body11 {
+        display: flex;
+        grid-area: body11;
+        flex-direction: column;
+        gap: 10px;
+        animation: rise 1.5s ease-out forwards;
+        animation-timeline: view();
+        animation-range: entry 0;
+        align-items: center;
+        overflow: hidden;
+        align-items: center;
+    }
+
+    .paragraph {
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-bottom: 10px;
+        font-family: "Neue Montreal Reg";
+        font-size: 17px;
+        color: #083D77;
+        width: 500px;
+        word-break: keep-all;
+        text-align: center;
+        animation: descslideUp 2s ease-out forwards;
+        animation-timeline: view();
+        animation-range: entry 0;
+        position: relative;
+        text-align: justify;
+        align-self: center;
+    }
+
+    .paragraph1 {
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-bottom: 10px;
+        font-family: "Neue Montreal Reg";
+        font-size: 20px;
+        color: #083D77;
+        width: 500px;
+        word-break: keep-all;
+        text-align: center;
+        animation: descslideUp 2s ease-out forwards;
+        position: relative;
+        text-align: justify;
+        align-self: center;
+    }
+
+    .imagetxt {
+        width: 1000px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .body1 {
+        overflow: hidden;
+        display: flex;
+        grid-area: body1;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        animation: fall 1.2s ease-out forwards;
+    }
+
+
+    .bgbody1 {
+        overflow: hidden;
+        width: 600px;
+        height: 600px;
+        border-radius: 25px;
+        background-image: url(hkpic0.jpg);
+        background-position: 100% 50%;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        transition: 1s;
+        text-decoration: none;
+        align-self: center;
+        position: relative;
+    }
+
+    .bgbody2 {
+        overflow: hidden;
+        width: 600px;
+        height: 600px;
+        border-radius: 25px;
+        background-image: url(hkpic1.jpg);
+        background-position: 100% 50%;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        transition: 1s;
+        text-decoration: none;
+        align-self: center;
+        position: relative;
+    }
+
+    .bgbody3 {
+        overflow: hidden;
+        width: 600px;
+        height: 600px;
+        border-radius: 25px;
+        background-image: url(hkpic3.jpg);
+        background-position: 100% 50%;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        transition: 1s;
+        text-decoration: none;
+        align-self: center;
+        position: relative;
+    }
+
+    .bgbody4 {
+        overflow: hidden;
+        width: 600px;
+        height: 600px;
+        border-radius: 25px;
+        background-image: url(hkpic4.jpg);
+        background-position: 100% 50%;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        transition: 1s;
+        text-decoration: none;
+        align-self: center;
+        position: relative;
+    }
+
+    .bgbody5 {
+        overflow: hidden;
+        width: 600px;
+        height: 600px;
+        border-radius: 25px;
+        background-image: url(hkpic6.jpg);
+        background-position: 100% 50%;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        transition: 1s;
+        text-decoration: none;
+        align-self: center;
+        position: relative;
+    }
+
+    .bgbody6 {
+        overflow: hidden;
+        width: 600px;
+        height: 600px;
+        border-radius: 25px;
+        background-image: url(hkpic7.jpg);
+        background-position: 100% 50%;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        transition: 1s;
+        text-decoration: none;
+        align-self: center;
+        position: relative;
+    }
+
+    .bgbody7 {
+        overflow: hidden;
+        width: 600px;
+        height: 600px;
+        border-radius: 25px;
+        background-image: url(hkpic9.jpg);
+        background-position: 100% 50%;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        transition: 1s;
+        text-decoration: none;
+        align-self: center;
+        position: relative;
+    }
+
+    .bgbody8 {
+        overflow: hidden;
+        width: 600px;
+        height: 600px;
+        border-radius: 25px;
+        background-image: url(hkpic10.jpg);
+        background-position: 100% 50%;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        transition: 1s;
+        text-decoration: none;
+        align-self: center;
+        position: relative;
+    }
+
+    .bgbody9 {
+        overflow: hidden;
+        width: 600px;
+        height: 600px;
+        border-radius: 25px;
+        background-image: url(hkpic11.jpg);
+        background-position: 60% 50%;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        transition: 1s;
+        text-decoration: none;
+        align-self: center;
+        position: relative;
+    }
+
+    .bgbody10 {
+        overflow: hidden;
+        width: 600px;
+        height: 600px;
+        border-radius: 25px;
+        background-image: url(hkpix15.jpg);
+        background-position: 100% 50%;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        transition: 1s;
+        text-decoration: none;
+        align-self: center;
+        position: relative;
+    }
+
+    .bgbody11 {
+        overflow: hidden;
+        width: 600px;
+        height: 600px;
+        border-radius: 25px;
+        background-image: url(hkpic13.jpg);
+        background-position: 100% 50%;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        transition: 1s;
+        text-decoration: none;
+        align-self: center;
+        position: relative;
+    }
+
+
+    .bodytitle {
+        font-family: "Neue Montreal Bold";
+        font-size: 50px;
+        color: #073668;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        animation: titleslideUp 1.5s ease-out forwards;
+        animation-timeline: view();
+        animation-range: entry 0;
+        text-decoration: none;
+    }
+
+    .bodytitle1 {
+        font-family: "Neue Montreal Bold";
+        font-size: 50px;
+        color: #073668;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        animation: titleslideUp 1s ease-out forwards;
+        text-decoration: none;
+    }
+
+
+    .bodysub {
+        font-family: "Neue Montreal Bold Italic";
+        font-size: 25px;
+        color: #073668;
+        align-self: center;
+        position: relative;
+        animation: subtitleslideUp 1.7s ease-out forwards;
+        animation-timeline: view();
+        animation-range: entry 0;
+        text-decoration: none;
+    }
+
+    .bodysub1 {
+        font-family: "Neue Montreal Bold Italic";
+        font-size: 25px;
+        color: #073668;
+        align-self: center;
+        position: relative;
+        animation: subtitleslideUp 1.2s ease-out forwards;
+        text-decoration: none;
+    }
+
+
+    .tldr-wrapper {
+        grid-area: TLDR;
+        flex-direction: column;
+        position: relative;
+        width: 1000px;
+        justify-self: center;
+        transition: 1s;
+    }
+
+    .tldr {
+        display: block;
+        background-color: #073668;
+        height: 50px;
+        transition: 2s;
+        cursor: pointer;
+        padding: 10px 20px;
+        animation: fall 1.2s ease-out forwards;
+    }   
+
+    .tldrtext {
+        font-family: "Neue Montreal Bold";
+        font-size: 25px;
+        color: #dcebff;
+        position: relative;
+        animation: titleslideUp 1.5s ease-out forwards;
+        text-decoration: none;
+        text-align: center;
+        margin: 10px;
+        line-height: 1;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: relative;
+        color: aliceblue;
+        background-color: #073668;
+        min-width: 160px;
+        padding: 12px 12px;
+        font-family: "Neue Montreal Reg";
+        overflow: hidden;
+    }
+
+    #tldr-toggle:checked ~ .dropdown-content {
+        max-height: 200px;
+        display: block;
+    }
+
+</style>
+</head>
+<body bgcolor=#dcebff>
+<div class="nav">
+    <div class="navlogo"><a href="login.html"><img src="WanderWHO LOGO.png" width="90px" height="auto" href="login.html"></a></div>
+    <div class="navtxt"><a href="index.html">Home</a></div>
+    <div class="navtxt"><a href="family.html">Family</a></div>
+    <div class="navtxt"><a href="friends.html">Friends</a></div>
+    <div class="navtxt"><a href="prosncons.html">Pros & Cons</a></div>
+    <div class="navtxt"><a href="gallery.html">Gallery</a></div>
+</div>
+
+<div class="content">
+    <div class="header">
+        <div><p class="subtitle">Take your pals to...</p>
+        <p class="title">HONG KONG</p></div>
+        <div><img src="hk header bg2.png" id="hkboat"></div>
+    </div>
+
+    <div class="divider"><hr class="rounded"></div>
+
+    <div class="text"><p class="texttxt">Originally Experienced By: Shanice Kezia</p></div>
+
+    <div class="tldr-wrapper">
+        <input type="checkbox" id="tldr-toggle" hidden>
+        <label for="tldr-toggle" class="tldr">
+            <div class="tldrtext">TLDR? Click me!</div>
+        </label>
+        <div class="dropdown-content">
+          <p>Went on a 10-day educational trip to Hong Kong and Shenzhen—visited top universities, made close bonds with student buddies, got lost, laughed way too much, cried a little, and made core memories. From night walks at Causeway Bay to chaotic shopping sprees and running away from a crazy person, every moment hit hard. Came back exhausted but so full of heart and food...</p>
+        </div>
+    </div>
+
+    <div class="body1">
+        <div class="bodytitle1">DAY 0</div>
+        <div class="bodysub1">Who Let Us Wear That to the Airport</div>
+        <div class="imagetxt">
+            <div class="bgbody1"></div>
+            <div class="paragraph1">
+                Our trip was an educational one—aka an edutrip—and the HK students were the first to kick things off. We were told to meet at the airport by 9 PM for our 12 AM flight. Everyone showed up serving their best airport fits, but my friend and I? We decided to twin in matching black tops and plaid pants… which ended up making us look a little silly (but iconic, honestly).
+
+<br> <br> While waiting for our flight, my friends and I were just goofing around as our teachers prepped us for the journey. Time dragged on, but eventually—finally—we boarded the plane. Since seats weren’t pre-assigned, we had to play musical chairs (and maybe lowkey fight) just to sit near each other.
+
+<br> <br> I thought I’d be chatting non-stop with my friends the whole flight, but nope. As soon as we took off, I started dozing off, and before I knew it, the five-hour flight had flown by.
+            </div>
+        </div>
+    </div>
+    
+    <div class="body2">
+        <div class="bodytitle">DAY 1</div>
+        <div class="bodysub">Chaos and TW: Din Tai Fung</div>
+        <div class="imagetxt">
+            <div class="bgbody2"></div>
+            <div class="paragraph">After a 5-hour flight, we had to quickly change into "formal attire" (according to our teachers) and freshen up before heading to Hong Kong University of Science and Technology (HKUST). The weather was unexpectedly cold and dry compared to the humid heat back home, but HKUST's massive campus and stunning island views made up for it. I even ran into an old friend, and the sheer number of Indonesian students there felt reassuring!
+
+    <br> <br>Next, we visited the University of Hong Kong (HKU). It had a more classic and classy vibe, with plants growing everywhere, making it feel like a maze. I made some great new friends with the student ambassadors, who surprisingly had the same humor as us (brainrot!).
+
+    <br> <br>After a long day, we finally made it to the hotel, and I was in awe of the city’s vibrant nightlife. We were given the freedom to choose dinner, so after much searching, we ended up at Din Tai Fung. BIG mistake—three times the price of Indonesia! It really hit our wallets hard, but at least we ade it back to the hotel safe and ready for the next day’s adventure.</div>
+        </div>
+    </div>
+
+    <div class="body3">
+        <div class="bodytitle">DAY 2</div>
+        <div class="bodysub">From Polyu to Absen yu!</div>
+        <div class="imagetxt">
+            <div class="bgbody3"></div>
+            <div class="paragraph">
+                We started the day by taking the MTR to Hong Kong Polytechnic University (POLYU). It was hectic—I'd forgotten how intense subway crowds could get—but we made it. POLYU’s campus was incredibly clean and cohesive, like every building followed the same mood board. Once we arrived, we split into groups, and I went to the IT section. Students there showed off their cool work-in-progress projects like VR notebooks and AI coffee machines. Honestly, I was tempted to jump in and start building something too.
+
+<br> <br>
+
+Next was City University of Hong Kong (CityU), which had one of the most gorgeous campus entrances I'd seen so far. But to be honest, the thing that stood out most was the nature around it. Also, turns out the campus is connected to a mall, so after grabbing dinner, I took the chance to shop for souvenirs—lots of Chiikawa and Sanrio, naturally.
+
+<br> <br>
+
+Walking back to the hotel, I was still in awe of the city life. The lights, the buzz, the energy—everything just felt so alive. After that, we arrived to the hotel safely, ready to face another journey tomorrow.
+            </div>
+        </div>
+    </div>
+
+    <div class="body4">
+        <div class="bodytitle">DAY 3</div>
+        <div class="bodysub">Finding Universities or Food?</div>
+        <div class="imagetxt">
+            <div class="bgbody4"></div>
+            <div class="paragraph">
+                Today, we visited the Hong Kong Institute of Vocational Education in Tsing Yi, which focused on IT. It was a super cool experience, with innovations like a bike riding game, a real-time debate grader, and fencing mannequins. On our way to the next university, the weather decided to pour, and of course, all the umbrellas were gone. So, I ended up wearing a gigantic white raincoat that made me feel like I was stuck in 2020 COVID days. Also, a random observation: Hong Kong bus drivers do not fear death! Good note!
+
+<br> <br> Next up, we headed to the Chinese University of Hong Kong (CUHK). This campus was huge, like it could've been its own island. The way each campus felt like its own world was mind-blowing! The scenery looked straight out of a painting, and there were tons of Indonesian student ambassadors around, which was a nice surprise. After touring CUHK, we were all starving, so my friends and I decided to grab dinner at a place our friend recommended. It turned out to be an amazing deal—way cheaper than the other places we’d eaten at, and the meal came with a ton of veggies and protein. After such a massive feast, I was in a total food coma by the end of the night!</div>
+        </div>
+    </div>
+
+    <div class="body5">
+        <div class="bodytitle">DAY 4</div>
+        <div class="bodysub">Chiikawa and Alumni Adventures</div>
+        <div class="imagetxt">
+            <div class="bgbody5"></div>
+            <div class="paragraph">
+                Today was church day! Me and my friends were a little late, but we managed to catch the mass just in time. Afterward, we had a great conversation with the pastor and snapped a pic to remember the moment. Once we had some free time, we went out to grab street food desserts from a nearby shop. We got lasagnas and milk tarts, and oh my, they were so delicious! We also tried our luck at claw machines (with lots of Chiikawa stuffed animals), but sadly, we didn’t win anything.
+
+<br> <br>
+
+Afterward, we visited Hong Kong Baptist University. To be honest, I wasn’t super excited about it except for the huge football and track field. The real adventure, however, was getting lost on the way there— we turned around 180 degrees twice! On the way back to the hotel, we took a double-decker bus for the first time, and it was so fun. Me and my friends couldn’t stop laughing at the back, even though we were supposed to be quiet (sorry!!). We also met two cute poodles and their super nice owner.
+
+<br> <br>
+
+When we got back to the hotel, we prepped for the main event of the day! Alumni Adventures showed us the best tourist spots in Hong Kong, including an old prison, but the highlight was definitely Tsim Sha Tsui with its gorgeous view of the water—absolutely breathtaking! We wrapped up the day with a classic Chinese dinner and played some really fun card games with my friends.
+            </div>
+        </div>
+    </div>
+
+    <div class="body6">
+        <div class="bodytitle">DAY 5</div>
+        <div class="bodysub">Kung Fu, Big Buddha, and Cable Cars</div>
+        <div class="imagetxt">
+            <div class="bgbody6"></div>
+            <div class="paragraph">
+                Today was packed with activities and no uni visits! We kicked things off with a long bus ride to Lantau Island, which totally reminded me of the game "Incantation." The village was super picturesque and peaceful. The highlight, though, was learning kung fu from a professional! It was pretty tiring, but after a while, we all got the hang of it and had a blast.
+
+<br> <br>
+
+Next, we headed to Ngong Ping, which was definitely a tourist trap, and much hotter than the other areas in Hong Kong. Despite that, we had plenty of time to hang out with our friends, which made it fun. We grabbed a bite at a "western" diner, but honestly, it wasn’t worth the pricey meal. No worries though, because after that, we went to Big Buddha. The 300,000,000 steps (okay, not really, but it felt like it!) were totally worth it for the amazing view and photos. Going down was way easier, and we ended the trip with an epic ride in cable cars. At first, I was a bit scared, but the sunset made everything worth it. And the best part? We waved to everyone we passed and they reciprocated! So fun!
+
+<br> <br>
+
+We got back to the hotel, and everyone was so exhausted that we dozed off almost instantly!</div>
+        </div>
+    </div>
+
+    <div class="body7">
+        <div class="bodytitle">DAY 6</div>
+        <div class="bodysub">HK Buddy Saga (HKBDS) Starts!</div>
+        <div class="imagetxt">
+            <div class="bgbody7"></div>
+            <div class="paragraph">
+                Today was the day I met my Hong Kong buddy. I only knew her name and what she looked like (total baddie), so I had to be extra extroverted. It was totally worth it though—we clicked so easily, and I was surprised at how well she spoke English.
+
+<br> <br>After some ice-breaker games, my buddy, her friends, and my school buddies went for lunch at a nearby mall. We ate Korean food, and my friend and I couldn’t help but notice how much less they ate compared to us. It made us feel like total foodies!
+
+<br> <br>Later, we went to the Hong Kong Museum of Art. The Renaissance paintings were stunning, but after a while, it got a bit boring (I’m sorry!). Before leaving, I looked at the amazing view and snapped a picture of the sea and me (after struggling to get the right one).
+
+<br> <br>We then reunited with our buddies for some after-school activities and visited Dondoki, a store I’d always wanted to go to. After a mini shopping spree (it was a small Dondoki), we had dinner by the sea. It was so much fun because we even made a silly unboxing vlog together.
+
+<br> <br>Finally, we took the subway back to the hotel, but by then, I wasn’t feeling too well, so I had to take some cough syrup before calling it a night.</div>
+        </div>
+    </div>
+
+    <div class="body8">
+        <div class="bodytitle">DAY 7</div>
+        <div class="bodysub">HKBDS Pt.2: Dondoki but At What Cost?</div>
+        <div class="imagetxt">
+            <div class="bgbody8"></div>
+            <div class="paragraph">
+                The day started with a simulation of Sun Kei classes, and my favorite part was the robotics workshop where we got to use a robot arm that separated waste based on photographic memory. The best part? Only my group managed to successfully use the robot!
+
+<br> <br>For lunch, my buddy took me and my friends to an Italian restaurant. The pasta was delicious, but the pizza? Absolutely amazing. Afterward, we made custom keychains with stickers—me and my friends went for Cars stickers and spent way too much time debating who had the best one.
+
+<br> <br>In the afternoon, my buddy led us to the mall for some shopping, followed by dinner at one of our HK buddy’s apartments. It was hilarious because me and my friends were speaking in Bahasa Indonesia, and our buddies laughed as if they understood (sorry gang!)
+
+<br> <br>After dinner, we headed back to the hotel area, and despite the cold, I couldn’t resist heading to the bigger Dondoki. I covered all 4 floors and went on a shopping spree. Unfortunately, all that excitement caught up with me, and I ended the night with a bad fever, crashing straight into bed.</div>
+        </div>
+    </div>
+
+    <div class="body9">
+        <div class="bodytitle">DAY 8</div>
+        <div class="bodysub">HKBDS Finale: Damn it, Mcdonald's!</div>
+        <div class="imagetxt">
+            <div class="bgbody9"></div>
+            <div class="paragraph">
+                It was our last day with our buddies, but unfortunately, I spent most of the morning at the hospital because my throat wasn’t getting any better (don’t worry, it wasn’t serious!). I met up with everyone at the Hong Kong Heritage Museum, but shortly after, everyone was ready to head out.
+
+<br> <br>We had lunch and then went back to Sun Kei for our school performance. We tried to perform a traditional Indonesian dance, but it was a disaster since we couldn’t remember the moves. At least we got to enjoy the Sun Kei students' performance, where they sang a cute Cantonese song!
+
+<br> <br>Afterward, my buddy took us to Mong Kok for some after-school activities. I scored some super cute clothes because they were so affordable! We also spent time in photo booths, taking a bunch of silly pictures.
+
+<br> <br>Dinner at McDonald's turned into an adventure when we noticed a man trying to strike up a conversation. My buddy warned us that he might be dangerous, and the girls panicked. Me and my friends laughed nervously, but luckily, the McDonald's manager helped us out, guiding us to the back so we could escape. We ran to the nearest MTR station and filed a report.
+
+<br> <br>It was time to say goodbye to our HK buddies. I returned to the hotel, my throat feeling even worse, but at least my fever had finally gone away.
+            </div>
+        </div>
+    </div>
+
+    <div class="body10">
+        <div class="bodytitle">DAY 9</div>
+        <div class="bodysub">Bye-bye, HongKong Hello, Shenzhen</div>
+        <div class="imagetxt">
+            <div class="bgbody10"></div>
+            <div class="paragraph">
+               Today we left Hong Kong and made our way to Shenzhen, China. The immigration process was tiring and complicated, but we finally made it through. We visited CUHK (the same one as in Hong Kong, but in China), and though it looked great, the bathrooms were a mess.
+
+<br> <br>The food there, though, was amazing—a delicious pork rice bowl with a fried egg on top. But the highlight of the day was the Shen Zhen Overseas Chinese City Travel Resort. It was beautiful, but I couldn’t fully enjoy it because I wasn’t feeling well. The real magic happened during the art performance, though—everything from the choreography to the confetti was mesmerizing!
+
+<br> <br>We wrapped up the day at a much bigger hotel than the one in Hong Kong, and though it was amazing, we were only staying for one night.
+            </div>
+        </div>
+    </div>
+
+    <div class="body11">
+        <div class="bodytitle">DAY 10</div>
+        <div class="bodysub">Bye-bye Shenzhen (and HK!)</div>
+        <div class="imagetxt">
+            <div class="bgbody11"></div>
+            <div class="paragraph">
+               It was our last day in Shenzhen and sadly, my throat still hadn’t recovered—my voice sounded like a little boy going through puberty. Before heading back to Hong Kong for our flight, we visited a factory (I honestly don’t remember what it was about because I was too busy goofing around with my friends).
+
+<br><br>After lunch—delicious bibimbap—we went through immigration again and took a long bus ride straight to the Hong Kong airport. While waiting to board, we found a Disneyland merch store and sprinted in. I grabbed a few keychains and a birthday gift for my friend. We also ate at a Gordon Ramsay-owned restaurant (supposedly), but it was so far from our gate that we almost missed boarding—and one of my friends even forgot her stuff on the plane (don’t worry, she got it back).
+
+<br> <br>I planned to watch a movie on the flight, but ended up falling asleep—and just like that, we were back in Indonesia, back to our homes.
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wander Who: Your Travel Consultant</title>
+
+<style>
+
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    @font-face {
+        font-family: "Neue Montreal Reg";
+        src: url(NeueMontreal-Regular.otf);
+    }
+
+    @font-face {
+        font-family: "Neue Montreal Bold";
+        src: url(NeueMontreal-Bold.otf);
+    }
+
+    @font-face {
+        font-family: "Neue Montreal Bold Italic";
+        src: url(NeueMontreal-BoldItalic.otf);
+    }
+
+    .nav {
+      position: fixed;
+      background-color: #69432d;
+      top: 10px;
+      left:25%;
+      right: 25%;
+      width: 50%;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      border-radius: 25px;
+      z-index: 1;
+    }
+
+    .navtxt {
+        color: rgb(252, 213, 191);
+        padding: 16px 16px;
+        border-radius: 50px;
+        text-decoration: none;
+        transition: 0.5s;
+        font-family: "Neue Montreal Bold";
+    }
+
+    .navtxt a:hover {
+        background-color: #9c4f1e5e;
+        color: rgb(255, 245, 240);
+        padding: 10px;
+        cursor: pointer;
+        font-size: 18px;
+    }
+
+    .navtxt a:visited, .navtxt a:link {
+        color: rgb(252, 213, 191);
+        padding: 16px 16px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.5s;
+        font-family: "Neue Montreal Bold";
+    }
+    
+    .navlogo {
+        transition: 0.5s;
+    }
+
+    .navlogo:hover {
+        scale: 105%;
+        cursor: pointer;
+        background-color: #135dac70;
+        padding: 1px 1px;
+        border-radius: 40px;
+        scale: 102%;
+    }
+
+    .content {
+        display: grid;
+        margin: 90px auto auto auto;
+        width: 1380px;
+        grid-template-columns: 690px 690px;
+        grid-template-rows: 250px 15px 30px 160px 750px 750px 750px 750px 750px 750px 750px;
+        grid-template-areas: 
+        "header header"
+        "divider divider"
+        "text text"
+        "TLDR TLDR"
+        "body1 body1"
+        "body2 body2"
+        "body3 body3"
+        "body4 body4"
+        "body5 body5"
+        "body6 body6"
+        "body7 body7"
+        ;
+        row-gap: 20px;
+        column-gap: 15px;
+    }
+
+    .header {
+        display: flex;
+        grid-area: header;
+        overflow: hidden;
+        height: 250px;
+        border-radius: 25px;
+        background-image: url(jpheader2.png);
+        background-position: center 1250px;
+        background-size: 1400px;
+        position: relative;
+        flex-direction: row;
+        justify-content: space-between;
+        opacity: 0;
+        animation: fall 2s ease-out forwards;
+    }
+
+    @keyframes fall {
+        0% {
+            transform: translateY(-50px);
+            opacity: 0;
+        }
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes rise {
+        0% {
+            transform: translateY(-50px);
+            opacity: 0;
+            scale: 0;
+        }
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+            scale: 1;
+        }
+    }
+
+    #jptower {
+        position: relative;
+        width: auto;
+        height: 450px;
+        animation: slideUpPlane 2s ease-out forwards;
+        animation-range: entry 0;
+        right: 360px;
+    }
+
+    @keyframes slideUpPlane {
+        0% {
+            top: 300px;
+        }
+        100% {
+            top: -160px;
+        }
+    }
+    
+    .title {
+        font-family: "Neue Montreal Bold";
+        font-size: 60px;
+        margin-left: 100px;
+        width: 750px;
+        color: aliceblue;
+        -webkit-text-stroke: 3px #083D77;
+        animation: titleslideUp 1.5s ease-out forwards;
+        position: relative;
+        font-size: 100px;
+    }
+
+    @keyframes titleslideUp {
+        0% {
+            opacity: 0;
+            top: 100px;
+        }
+        100% {
+            opacity: 1;
+            top: 0px;
+        }
+    }
+
+    .subtitle {
+        font-family: "Neue Montreal Bold";
+        font-size: 30px;
+        margin-top: 40px;
+        margin-left: 100px;
+        color: #073668;
+        animation: subtitleslideUp 1s ease-out forwards;
+        position: relative;
+    }
+
+    @keyframes subtitleslideUp {
+        0% {
+            opacity: 0;
+            top: 100px;
+        }
+        100% {
+            opacity: 1;
+            top: 0px;
+        }
+    }
+
+    @keyframes descslideUp {
+        0% {
+            opacity: 0;
+            top: 100px;
+        }
+        100% {
+            opacity: 1;
+            top: 5px;
+        }
+    }
+
+    .divider {
+        align-self: center;
+        grid-area: divider;
+        animation: openup 1s ease-out forwards;
+        animation-timeline: view();
+        animation-range: entry 0;
+    }
+
+    hr.rounded {
+        border-top: 2px solid #69432d;
+        border-radius: 5px;
+        align-self: center;
+        transform-origin: center;
+        animation: openup 2s ease-out forwards;
+    }
+
+    @keyframes openup {
+        0% {
+            transform: scaleX(0);
+        }
+        100% {
+            transform: scaleX(0.9);
+        }   
+    }
+
+    @keyframes slideup {
+        0% {
+            opacity: 0;
+            top: 50px;
+
+        }
+        100% {
+            opacity: 1;
+            top: 0px;
+        }
+    }
+
+    .text {
+        grid-area: text;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+    }
+
+    .texttxt {
+        font-family: "Neue Montreal Bold Italic";
+        font-size: 23px;
+        align-items: center;
+        color:#073668;
+        position: relative;
+        animation: subtitleslideUp 1s ease-out forwards; 
+    }
+
+
+    .body2 {
+        display: flex;
+        grid-area: body2;
+        flex-direction: column;
+        gap: 10px;
+        animation: rise 1.5s ease-out forwards;
+        animation-timeline: view();
+        animation-range: entry 0;
+        overflow: hidden;
+        align-items: center;
+    }
+
+    .body3 {
+        display: flex;
+        grid-area: body3;
+        flex-direction: column;
+        gap: 10px;
+        animation: rise 1.5s ease-out forwards;
+        animation-timeline: view();
+        animation-range: entry 0;
+        overflow: hidden;
+        align-items: center;
+    }
+
+    .body4 {
+        display: flex;
+        grid-area: body4;
+        flex-direction: column;
+        gap: 10px;
+        animation: rise 1.5s ease-out forwards;
+        animation-timeline: view();
+        animation-range: entry 0;
+        align-items: center;
+        overflow: hidden;
+        align-items: center;
+    }
+
+    .body5 {
+        display: flex;
+        grid-area: body5;
+        flex-direction: column;
+        gap: 10px;
+        animation: rise 1.5s ease-out forwards;
+        animation-timeline: view();
+        animation-range: entry 0;
+        align-items: center;
+        overflow: hidden;
+        align-items: center;
+    }
+
+    .body6 {
+        display: flex;
+        grid-area: body6;
+        flex-direction: column;
+        gap: 10px;
+        animation: rise 1.5s ease-out forwards;
+        animation-timeline: view();
+        animation-range: entry 0;
+        align-items: center;
+        overflow: hidden;
+        align-items: center;
+    }
+
+    .body7 {
+        display: flex;
+        grid-area: body7;
+        flex-direction: column;
+        gap: 10px;
+        animation: rise 1.5s ease-out forwards;
+        animation-timeline: view();
+        animation-range: entry 0;
+        align-items: center;
+        overflow: hidden;
+        align-items: center;
+    }
+
+    .paragraph {
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-bottom: 10px;
+        font-family: "Neue Montreal Reg";
+        font-size: 17px;
+        color: #083D77;
+        width: 500px;
+        word-break: keep-all;
+        text-align: center;
+        animation: descslideUp 2s ease-out forwards;
+        animation-timeline: view();
+        animation-range: entry 0;
+        position: relative;
+        text-align: justify;
+        align-self: center;
+    }
+
+    .paragraph1 {
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-bottom: 10px;
+        font-family: "Neue Montreal Reg";
+        font-size: 20px;
+        color: #083D77;
+        width: 500px;
+        word-break: keep-all;
+        text-align: center;
+        animation: descslideUp 2s ease-out forwards;
+        position: relative;
+        text-align: justify;
+        align-self: center;
+    }
+
+    .imagetxt {
+        width: 1000px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .body1 {
+        overflow: hidden;
+        display: flex;
+        grid-area: body1;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        animation: fall 1.2s ease-out forwards;
+    }
+
+
+    .bgbody1 {
+        overflow: hidden;
+        width: 600px;
+        height: 600px;
+        border-radius: 25px;
+        background-image: url(3.png);
+        background-position: 100% 50%;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        transition: 1s;
+        text-decoration: none;
+        align-self: center;
+        position: relative;
+    }
+
+    .bgbody2 {
+        overflow: hidden;
+        width: 600px;
+        height: 600px;
+        border-radius: 25px;
+        background-image: url(4.png);
+        background-position: 100% 50%;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        transition: 1s;
+        text-decoration: none;
+        align-self: center;
+        position: relative;
+    }
+
+    .bgbody3 {
+        overflow: hidden;
+        width: 600px;
+        height: 600px;
+        border-radius: 25px;
+        background-image: url(9.png);
+        background-position: 100% 50%;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        transition: 1s;
+        text-decoration: none;
+        align-self: center;
+        position: relative;
+    }
+
+    .bgbody4 {
+        overflow: hidden;
+        width: 600px;
+        height: 600px;
+        border-radius: 25px;
+        background-image: url(11.png);
+        background-position: 100% 50%;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        transition: 1s;
+        text-decoration: none;
+        align-self: center;
+        position: relative;
+    }
+
+    .bgbody5 {
+        overflow: hidden;
+        width: 600px;
+        height: 600px;
+        border-radius: 25px;
+        background-image: url(14.png);
+        background-position: 100% 50%;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        transition: 1s;
+        text-decoration: none;
+        align-self: center;
+        position: relative;
+    }
+
+    .bgbody6 {
+        overflow: hidden;
+        width: 600px;
+        height: 600px;
+        border-radius: 25px;
+        background-image: url(17.png);
+        background-position: 100% 50%;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        transition: 1s;
+        text-decoration: none;
+        align-self: center;
+        position: relative;
+    }
+
+    .bgbody7 {
+        overflow: hidden;
+        width: 600px;
+        height: 600px;
+        border-radius: 25px;
+        background-image: url(19.png);
+        background-position: 100% 50%;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        transition: 1s;
+        text-decoration: none;
+        align-self: center;
+        position: relative;
+    }
+
+
+    .bodytitle {
+        font-family: "Neue Montreal Bold";
+        font-size: 50px;
+        color: #073668;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        animation: titleslideUp 1.5s ease-out forwards;
+        animation-timeline: view();
+        animation-range: entry 0;
+        text-decoration: none;
+    }
+
+    .bodytitle1 {
+        font-family: "Neue Montreal Bold";
+        font-size: 50px;
+        color: #073668;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        animation: titleslideUp 1s ease-out forwards;
+        text-decoration: none;
+    }
+
+
+    .bodysub {
+        font-family: "Neue Montreal Bold Italic";
+        font-size: 25px;
+        color: #073668;
+        align-self: center;
+        position: relative;
+        animation: subtitleslideUp 1.7s ease-out forwards;
+        animation-timeline: view();
+        animation-range: entry 0;
+        text-decoration: none;
+    }
+
+    .bodysub1 {
+        font-family: "Neue Montreal Bold Italic";
+        font-size: 25px;
+        color: #073668;
+        align-self: center;
+        position: relative;
+        animation: subtitleslideUp 1.2s ease-out forwards;
+        text-decoration: none;
+    }
+
+
+    .tldr-wrapper {
+        grid-area: TLDR;
+        flex-direction: column;
+        position: relative;
+        width: 1000px;
+        justify-self: center;
+        transition: 1s;
+    }
+
+    .tldr {
+        display: block;
+        background-color: #073668;
+        height: 50px;
+        transition: 2s;
+        cursor: pointer;
+        padding: 10px 20px;
+        animation: fall 1s ease-out forwards;
+    }   
+
+    .tldrtext {
+        font-family: "Neue Montreal Bold";
+        font-size: 25px;
+        color: #dcebff;
+        position: relative;
+        animation: titleslideUp 1.5s ease-out forwards;
+        text-decoration: none;
+        text-align: center;
+        margin: 10px;
+        line-height: 1;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: relative;
+        color: aliceblue;
+        background-color: #073668;
+        min-width: 160px;
+        padding: 12px 12px;
+        font-family: "Neue Montreal Reg";
+        overflow: hidden;
+    }
+
+    #tldr-toggle:checked ~ .dropdown-content {
+        max-height: 200px;
+        display: block;
+    }
+
+</style>
+</head>
+<body bgcolor=#dcebff>
+<div class="nav">
+    <div class="navlogo"><a href="login.html"><img src="WanderWHO LOGO.png" width="90px" height="auto" href="login.html"></a></div>
+    <div class="navtxt"><a href="index.html">Home</a></div>
+    <div class="navtxt"><a href="family.html">Family</a></div>
+    <div class="navtxt"><a href="friends.html">Friends</a></div>
+    <div class="navtxt"><a href="prosncons.html">Pros & Cons</a></div>
+    <div class="navtxt"><a href="gallery.html">Gallery</a></div>
+</div>
+
+<div class="content">
+    <div class="header">
+        <div><p class="subtitle">Take mama and papa to...</p>
+        <p class="title">JAPAN</p></div>
+        <div><img src="jp header1.png" id="jptower"></div>
+    </div>
+
+    <div class="divider"><hr class="rounded"></div>
+
+    <div class="text"><p class="texttxt">Originally Experienced By: Lilian Emilie</p></div>
+
+    <div class="tldr-wrapper">
+        <input type="checkbox" id="tldr-toggle" hidden>
+        <label for="tldr-toggle" class="tldr">
+            <div class="tldrtext">TLDR? Click me!</div>
+        </label>
+        <div class="dropdown-content">
+          <p>Spent 7 days in Japan visiting Tokyo, Karuizawa, and Kyoto with family. Highlights included shrine visits, skiing, shopping in Akihabara, exploring bamboo forests, and eating everything from sushi to ice cream. Traveled by Shinkansen, stayed in cozy accommodations, and had both chill and chaotic moments.
+
+            Recommendation: Going on holidays with family is great if you want to make shared memories, experience new things together, and bond—even if you don’t always agree on where to eat.</p>
+        </div>
+    </div>
+
+    <div class="body1">
+        <div class="bodytitle1">DAY 1</div>
+        <div class="bodysub1">Settling In</div>
+        <div class="imagetxt">
+            <div class="bgbody1"></div>
+            <div class="paragraph1">On the night I arrived with my family to Japan, we rode a taxi to our Air bnb at Asakusa. The bill for the trip on Taxi was quite expensive, but at least we got to our destination. After putting our luggages in our Air bnb, we left to get dinner at a nearby restaurant just 5 minutes away from the hotel. Ironically enough, the person who owned the restaurant was Chinese so we ended up eating Chinese food on our first night in Japan. <br><br>After that, we took a stroll through the city to admire the night atmosphere of Tokyo. We ended up at a Shrine located not too far from our Air bnb, and took a few pictures. Thankfully it wasn’t too crowded, and I was able to take my fortune slip only to get “decent luck”. After that, we walked back to our Air bnb and went to sleep for our first night in Tokyo.</div>
+        </div>
+    </div>
+    
+    <div class="body2">
+        <div class="bodytitle">DAY 2</div>
+        <div class="bodysub">Otaku Paradise</div>
+        <div class="imagetxt">
+            <div class="bgbody2"></div>
+            <div class="paragraph">On the second day, me and my family woke up early to get breakfast at a nearby western restaurant in the district. The food was okay, it wasn’t anything amazing though the locals seemed to think it was really good and even foreigners were coming over. After that, we headed straight to Akihabara through the MRT. Thankfully it was a Monday, so the streets of Akihabara were not too crowded. <br> <br> Although many of the restaurants were still crowded, I suggest splitting up. Both my parents lined up at the restaurant to get a seat for the 4 of us, while me and my brother walked around for about 30 minutes before our parents called us to return since we already had a place to sit. After lunch, my brother and I spent 4 hours walking around the Akihabara streets and shops. After that, we left to visit an Aquarium Museum with very beautiful fish tanks that were lit with all sorts of colors. It was a small yet unique exhibition. After that, we went to walk around the Shinjuku streets to get ourselves sushi for dinner. After dinner, we walked around for about an hour to buy stuff at small shops and Daiso. At 9pm, we headed back to the MRT station and headed back home at the end of the day.</div>
+        </div>
+    </div>
+
+    <div class="body3">
+        <div class="bodytitle">DAY 3</div>
+        <div class="bodysub">Into the Snow</div>
+        <div class="imagetxt">
+            <div class="bgbody3"></div>
+            <div class="paragraph">We woke up at 8:00 am and checked out of our Air bnb to head to our next destination: Karuizawa. The location was a famous place to go skiing. We headed straight to the Tokyo Train Station and got there just in time before the train left. The reason we took a little longer was because we were buying food first. The train ride to Karuizawa took about an hour using the Shinkansen line.  We arrived at around lunch time, before heading to check into the cabins. We were taken to the cabin via van and our cabin got a nice view of the mountains ahead. <br> <br> We rested for about an hour before I realized there was a store I wanted to visit in Old Town Karuizawa. My family and I tried our best to rush to Old Town Karuizawa but we did not make it in time before all the stores were closed. You see, in Japan during winter most shops close at 5pm and I happen to arrive at 5:30 pm. The journey from the cabin to the hotel, hotel to the station and station to the Old Town took around half an hour. With great sadness, I planned to go again tomorrow. <br> <br> After that, we ate at a nearby restaurant that was surprisingly fancy. They served large hot bowls of udon and soup, perfect to accommodate for the chilly weather. After that, my family decided to walk back to the hotel which would take about 45 minutes. It was a nice way to admire the atmosphere. On our way back, we happened to stop by at an ice cream shop that had one of the best ice creams I’ve ever tasted. After that, we headed straight back to the cabin and rested.</div>
+        </div>
+    </div>
+
+    <div class="body4">
+        <div class="bodytitle">DAY 4</div>
+        <div class="bodysub">Slopes & Souvenirs</div>
+        <div class="imagetxt">
+            <div class="bgbody4"></div>
+            <div class="paragraph">We woke up early because today was the day we were going to go skiing! At around 9am, we left the cabin and headed to the ski park nearby the hotel. My brother took a 4 hour long ski session while I attempted to snowboard. After a few hours, we decided to call it a day at 2 am so that we could go back to Old Town Karuizawa to visit the shops that we couldn't on the previous day. <br> <br> Thankfully this time we arrived at the Old Town at 4pm so we had enough time to look around. After that, we rode a taxi back to the station and ate dinner at the Outlet nearby. They had the best chicken katsu I have ever tasted in my life. After that, we walked around the outlet for about an hour until it closed and we headed back to the cabin for the day.</div>
+        </div>
+    </div>
+
+    <div class="body5">
+        <div class="bodytitle">DAY 5</div>
+        <div class="bodysub">Southbound to Kyoto</div>
+        <div class="imagetxt">
+            <div class="bgbody5"></div>
+            <div class="paragraph">This morning we had to wake up a bit earlier at around 7am because the train we’re going to be taking to Kyoto ( our next stop ) would leave at 9:30 am and we still had to pack up. We managed to get on the train right on time again. The journey from Karuizawa to Kyoto was a long one taking the Shinkansen line. We headed up North where the weather was much colder and we got to see snow cover the entire land. After that, we headed back down South and finally arrived at Kyoto at 3 pm so technically it was a 6 hour-ish journey. <br> <br> When we arrived at Kyoto, we immediately headed to a nearby restaurant just 10 minutes walking away from the Kyoto Station and ate our lunch. After that, we took a 15 -20 minute walk to our rented apartment. This time, the apartment was very nice. The facilities were clean, and the room wasn’t too small to accommodate 4 people because it even had a living room. After taking a rest for about an hour, we left to go to the famous Fushimi Inari Shrine. <br> <br> We took the MRT to the shrine, and the streets below the shrine were crowded with all sorts of vendors and food stalls.  Most people would come here in the day, but we came here at night where yes it would be more creepy but it was less crowded. Me and my mom were able to reach the first half of the very long flight of stairs covered by the Tori gates, but my brother and father continued until the very top while the both of us waited. After that, we had a very late dinner at a small gyoza restaurant and immediately headed back home via MRT.</div>
+        </div>
+    </div>
+
+    <div class="body6">
+        <div class="bodytitle">DAY 6</div>
+        <div class="bodysub">Crowds & Calm</div>
+        <div class="imagetxt">
+            <div class="bgbody6"></div>
+            <div class="paragraph">The  6th day was reserved specifically for a visit to the Kiyomizu dera shrine. Throughout the entire day, we walked through the streets that led to the shrine, and  it was hellishly crowded with both tourists from all over the world and even school children on field trips. I wouldn’t say my visit wasn’t enjoyable nor horrible, but we could’ve picked a better time to come and I’m not a big fan of shrine visiting. <br> <br> The only winning score was that the views were pretty. After our shrine visit, as we were walking down the street back to the bus stop it started raining. We had to stay in a small cafe where we all got matcha drinks as we waited out for the rain to stop. When the rain did stop, we walked down back to the main street to get some Udon, though it really was mediocre.  After having our late lunch, we headed back to the Kyoto Station by bus and took the MRT to the Arashiyama Bamboo forest. Thankfully it wasn't as crowded and we were able to take many photos of the very unique scenery and bamboo. <br> <br>After that, we headed back to Kyoto Station and got dinner at a food court at a nearby mall. Then we went to a tall building with a variety of shopping districts with 10 floors. My brother and I went to the top floor to look at a huge bookstore that sold all kinds of books and manga that I enjoyed, although I decided not to buy anything at the moment. Finally, we took the taxi back to our apartment and rested.</div>
+        </div>
+    </div>
+
+    <div class="body7">
+        <div class="bodytitle">DAY 7</div>
+        <div class="bodysub">Journey Home</div>
+        <div class="imagetxt">
+            <div class="bgbody7"></div>
+            <div class="paragraph">The last day was really just travelling back home. We woke up at 8am and checked out of the apartment at 10 am. We took a taxi back to the Kyoto Station where we caught a bus and rode it all the way to Osaka. We stopped at the Narita Airport as we were going to take a flight back to Hanaeda Airport back in Tokyo where our main actual flight back to Jakarta would be. Before the flight, we had a quick brunch before catching our flight at 2 pm. <br> <br>We arrived at Haneda Airport back in Tokyo and had early dinner before walking around some shops in the airport. When I finally boarded the plane at 6pm, it was to my surprise that I met some of my classmates and friends on the same flight who were also on their way home. It was a long and restless 7 hour flight, but we arrived safely at midnight.</div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

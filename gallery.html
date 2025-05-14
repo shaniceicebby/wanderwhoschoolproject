@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wander Who: Your Travel Consultant</title>
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+  />
+
+  <style>
+    body {
+      background: #fff;
+      font-family: Arial, sans-serif;
+      padding: 30px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .swiper {
+        scale: 150%;
+        width: 90%;
+        max-width: 600px;
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+
+    .swiper-slide {
+        background-position: center;
+        background-size: cover;
+        width: 240px;
+        height: 300px;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 10px 20px #135dac95;
+    }
+
+    .swiper-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    @font-face {
+        font-family: "Neue Montreal Reg";
+        src: url(NeueMontreal-Regular.otf);
+    }
+
+    @font-face {
+        font-family: "Neue Montreal Bold";
+        src: url(NeueMontreal-Bold.otf);
+    }
+
+    @font-face {
+        font-family: "Neue Montreal Bold Italic";
+        src: url(NeueMontreal-BoldItalic.otf);
+    }
+
+.nav {
+      position: fixed;
+      background-color: #083D77;
+      top: 10px;
+      left:25%;
+      right: 25%;
+      width: 50%;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      border-radius: 25px;
+      z-index: 1;
+    }
+
+    .navtxt {
+        color: rgb(191, 223, 252);
+        padding: 16px 16px;
+        border-radius: 50px;
+        text-decoration: none;
+        transition: 0.5s;
+        font-family: "Neue Montreal Bold";
+    }
+
+    .navtxt a:hover {
+        background-color: #135dac70;
+        color: aliceblue;
+        padding: 10px;
+        cursor: pointer;
+        font-size: 18px;
+    }
+
+    .navtxt a:visited, .navtxt a:link {
+        color: rgb(191, 223, 252);
+        padding: 16px 16px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.5s;
+        font-family: "Neue Montreal Bold";
+    }
+    
+    .navlogo {
+        transition: 0.5s;
+    }
+
+    .navlogo:hover {
+        scale: 105%;
+        cursor: pointer;
+        background-color: #135dac70;
+        padding: 1px 1px;
+        border-radius: 40px;
+        scale: 102%;
+    }
+
+    .content {
+        display: grid;
+        margin: 90px auto auto auto;
+        max-width: 1380px;
+        grid-template-columns: 690px 690px;
+        grid-template-rows: 250px 20px 120px;
+        grid-template-areas: 
+        "header header"
+        "divider divider"
+        "pick pick"
+        ;
+        row-gap: 20px;
+        column-gap: 15px;
+    }
+
+    .header {
+        display: flex;
+        grid-area: header;
+        overflow: hidden;
+        width: 1380px;
+        height: 250px;
+        border-radius: 25px;
+        background-image: url(jpgallerybg.png);
+        background-position: center 1350px;
+        background-size: 1400px;
+        position: relative;
+        flex-direction: row;
+        justify-content: space-evenly;
+        opacity: 0;
+        animation: fall 2s ease-out forwards;
+    }
+
+    @keyframes fall {
+        0% {
+            transform: translateY(-50px);
+            opacity: 0;
+        }
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes rise {
+        0% {
+            transform: translateY(-50px);
+            opacity: 0;
+            scale: 0.5;
+        }
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+            scale: 1;
+        }
+    }
+    
+    #person {
+        position: relative;
+        width: auto;
+        height: 650px;
+        animation: slideUpPlane 1.6s ease-out forwards;
+        right: 10px;
+    }
+
+    @keyframes slideUpPlane {
+        0% {
+            top: 300px;
+        }
+        100% {
+            top: -100px;
+        }
+    }
+    
+    .title {
+        font-family: "Neue Montreal Bold";
+        font-size: 120px;
+        margin-top: 50px;
+        left: 100px;
+        color: aliceblue;
+        -webkit-text-stroke: 3px #083D77;
+        animation: titleslideUp 1.3s ease-out forwards;
+        position: relative;
+    }
+
+    @keyframes titleslideUp {
+        0% {
+            opacity: 0;
+            top: 400px;
+        }
+        100% {
+            opacity: 1;
+            top: 0px;
+        }
+    }
+
+    @keyframes subtitleslideUp {
+        0% {
+            opacity: 0;
+            top: 100px;
+        }
+        100% {
+            opacity: 1;
+            top: 5px;
+        }
+    }
+
+    @keyframes descslideUp {
+        0% {
+            opacity: 0;
+            top: 100px;
+        }
+        100% {
+            opacity: 1;
+            top: 5px;
+        }
+    }
+
+    .divider {
+        grid-area: divider;
+        animation: openup 1s ease-out forwards;
+        align-self: center;
+    }
+
+    hr.rounded {
+        border-top: 2px solid #135dac;
+        border-radius: 5px;
+        align-self: center;
+        transform-origin: center;
+        animation: openup 2s ease-out forwards;
+    }
+
+    @keyframes openup {
+        0% {
+            transform: scaleX(0);
+        }
+        100% {
+            transform: scaleX(0.9);
+        }   
+    }
+
+    @keyframes slideup {
+        0% {
+            opacity: 0;
+            top: 50px;
+
+        }
+        100% {
+            opacity: 1;
+            top: 0px;
+        }
+    }
+
+    .text {
+        grid-area: text;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+    }
+
+    .texttxt {
+        font-family: "Neue Montreal Bold Italic";
+        font-size: 50px;
+        align-items: center;
+        color:#073668;
+        position: relative;
+        animation: subtitleslideUp 1s ease-out forwards; 
+    }
+
+    .body1 {
+        overflow: hidden;
+        display: flex;
+        grid-area: body1;
+        flex-direction: column;
+        background-color: #96bee9;
+        box-shadow: 2px 2px 10px #073668;
+        gap: 10px;
+        padding: 30px;
+        border: 2px solid #073668;
+        border-radius: 25px;
+        animation: fall 1.5s ease-out forwards;
+    }
+
+
+    .bodytitle {
+        font-family: "Neue Montreal Bold";
+        font-size: 25px;
+        color: aliceblue;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        animation: titleslideUp 1.5s ease-out forwards;
+
+        text-decoration: none;
+    }
+
+
+    .bodysub {
+        font-family: "Neue Montreal Bold Italic";
+        font-size: 30px;
+        color: #073668;
+        align-self: center;
+        position: relative;
+        animation: subtitleslideUp 1.7s ease-out forwards;
+
+        text-decoration: none;
+    }
+
+    .center {
+        grid-area: pick;
+        text-align: center;
+        font-size: 25px;
+    }
+
+    .pagination {
+        display: inline-block;
+    }
+
+    .pagination a {
+        width: 500px;
+        height: auto;
+        align-self: center;
+        font-family: "Neue Montreal Bold";
+        color: #073668;
+        background-color: #80b1e6;
+        float: left;
+        padding: 8px 16px;
+        text-decoration: none;
+        transition: 0.5s;
+        border: 2px solid #073668;
+        margin: 0 10px;
+        border-radius: 10px;
+    }
+
+    .pagination a.active {
+        background-color: #073668;
+        color: white;
+        border: 2px solid #001429;
+    }
+
+    .pagination a:hover:not(.active) {
+        opacity: 1;
+        scale: 102%;
+    }
+
+    .pagination a:hover.active {
+        opacity: 1;
+        scale: 102%;
+    }
+    
+    .pagination a:not(.active) {
+        opacity: 0.5;
+    }
+
+    body {
+      background: #fff;
+      font-family: Arial, sans-serif;
+      padding: 30px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    body {
+        background-color: #dcebff;
+    }
+
+    .subtitle {
+        font-family: "Neue Montreal Bold";
+        font-size: 30px;
+        margin-top: 40px;
+        margin-left: 100px;
+        color: #073668;
+        animation: subtitleslideUp 1s ease-out forwards;
+        position: relative;
+    }
+
+  </style>
+</head>
+<body>
+<div class="nav">
+    <div class="navlogo"><a href="login.html"><img src="WanderWHO LOGO.png" width="90px" height="auto" href="login.html"></a></div>
+    <div class="navtxt"><a href="index.html">Home</a></div>
+    <div class="navtxt"><a href="family.html">Family</a></div>
+    <div class="navtxt"><a href="friends.html">Friends</a></div>
+    <div class="navtxt"><a href="prosncons.html">Pros & Cons</a></div>
+    <div class="navtxt"><a href="gallery.html">Gallery</a></div>
+</div>
+
+<div class="content">
+    <div class="header">
+        <div><p class="title">Gallery</p></div>
+        <div><img src="jpgalleryhead.png" id="person"></div>
+    </div>
+
+    <div class="divider"><hr class="rounded"></div>
+
+    <div class="center">
+        <div class="pagination">
+            <a href="gallery.html" class="active">JAPAN</a>
+            <a href="gallery2.html">HONG KONG</a>
+        </div>
+    </div>
+</div>
+
+
+  <div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="1.png" /></div>
+      <div class="swiper-slide"><img src="2.png" /></div>
+      <div class="swiper-slide"><img src="3.png" /></div>
+      <div class="swiper-slide"><img src="4.png" /></div>
+      <div class="swiper-slide"><img src="5.png" /></div>
+      <div class="swiper-slide"><img src="6.png" /></div>
+      <div class="swiper-slide"><img src="7.png" /></div>
+      <div class="swiper-slide"><img src="8.png" /></div>
+      <div class="swiper-slide"><img src="9.png" /></div>
+      <div class="swiper-slide"><img src="10.png" /></div>
+      <div class="swiper-slide"><img src="11.png" /></div>
+      <div class="swiper-slide"><img src="12.png" /></div>
+      <div class="swiper-slide"><img src="13.png" /></div>
+      <div class="swiper-slide"><img src="14.png" /></div>
+      <div class="swiper-slide"><img src="15.png" /></div>
+      <div class="swiper-slide"><img src="16.png" /></div>
+      <div class="swiper-slide"><img src="17.png" /></div>
+      <div class="swiper-slide"><img src="18.png" /></div>
+      <div class="swiper-slide"><img src="19.png" /></div>
+      <div class="swiper-slide"><img src="21.png" /></div>
+      <div class="swiper-slide"><img src="22.png" /></div>
+      <div class="swiper-slide"><img src="23.png" /></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <script>
+    var swiper = new Swiper(".mySwiper", {
+      effect: "coverflow",
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: "auto",
+      coverflowEffect: {
+        rotate: 30,
+        stretch: 0,
+        depth: 100,
+        modifier: 1,
+        slideShadows: true,
+      },
+      loop: true,
+    });
+  </script>
+</body>
+</html>

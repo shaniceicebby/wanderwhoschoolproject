@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wander Who: Log In!</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    @font-face {
+      font-family: "Neue Montreal Reg";
+      src: url(NeueMontreal-Regular.otf);
+    }
+
+    @font-face {
+      font-family: "Neue Montreal Bold";
+      src: url(NeueMontreal-Bold.otf);
+    }
+
+    body {
+      background-color: #dcebff;
+      font-family: "Neue Montreal Reg";
+    }
+
+    .nav {
+      position: fixed;
+      background-color: #083D77;
+      top: 10px;
+      left:25%;
+      right: 25%;
+      width: 50%;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      border-radius: 25px;
+      z-index: 1;
+    }
+
+    .navtxt {
+        color: rgb(191, 223, 252);
+        padding: 16px 16px;
+        border-radius: 50px;
+        text-decoration: none;
+        transition: 0.5s;
+        font-family: "Neue Montreal Bold";
+    }
+
+    .navtxt a:hover {
+        background-color: #135dac70;
+        color: aliceblue;
+        padding: 10px;
+        cursor: pointer;
+        font-size: 18px;
+    }
+
+    .navtxt a:visited, .navtxt a:link {
+        color: rgb(191, 223, 252);
+        padding: 16px 16px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.5s;
+        font-family: "Neue Montreal Bold";
+    }
+    
+    .navlogo {
+        transition: 0.5s;
+    }
+
+    .navlogo:hover {
+        scale: 105%;
+        cursor: pointer;
+        background-color: #135dac70;
+        padding: 1px 1px;
+        border-radius: 40px;
+        scale: 102%;
+    }
+
+    .container {
+      display: grid;
+      width: 100%;
+      grid-template-columns: 600px;
+      grid-template-rows: 160px 450px 60px;
+      grid-template-areas:
+      "header"
+      "form"
+      "footer"
+      ;
+      margin: 80px auto 20px auto;
+      row-gap: 2px;
+      justify-content: center;
+      animation: fall 1.3s ease-out forwards;
+    }
+
+    @keyframes fall {
+        0% {
+            transform: translateY(-50px);
+            opacity: 0;
+        }
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .header {
+      grid-area: header;
+      background-color: #083d77;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      border-radius: 10px 10px 0 0;
+    }
+
+    .header h1 {
+      color: aliceblue;
+      margin-bottom: 20px;
+      font-family: "Neue Montreal Bold";
+    }
+
+    .form-container {
+      grid-area: form;
+      background: aliceblue;
+      padding: 30px;
+      font-family: "Neue Montreal Reg";
+    }
+
+    .form-container h2 {
+      margin-bottom: 15px;
+    }
+
+    .form-container input {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .form-container button,
+    .form-container input[type="submit"] {
+      background-color: #083d77;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-family: "Neue Montreal Bold";
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .footer {
+      grid-area: footer;
+      background-color: #083d77;
+      text-align: center;
+      padding: 15px;
+      border-radius: 0 0 10px 10px;
+    }
+
+    .footer h5 {
+      color: rgb(255, 255, 255);
+    }
+
+    .toggle-btns {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .toggle-btns button {
+      margin: 5px;
+      padding: 8px 15px;
+      border-radius: 5px;
+      border: none;
+      background-color: #135dac70;
+      color: white;
+      cursor: pointer;
+      font-family: "Neue Montreal Bold";
+    }
+
+    .toggle-btns .active {
+      background-color: #083d77;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="nav">
+    <div class="navlogo"><a href="login.html"><img src="WanderWHO LOGO.png" width="90px" height="auto"></a></div>
+    <div class="navtxt"><a href="index.html">Home</a></div>
+    <div class="navtxt"><a href="family.html">Family</a></div>
+    <div class="navtxt"><a href="friends.html">Friends</a></div>
+    <div class="navtxt"><a href="prosncons.html">Pros & Cons</a></div>
+    <div class="navtxt"><a href="gallery.html">Gallery</a></div>
+  </div>
+
+  <div class="container">
+    <div class="header">
+      <img src="WanderWHO LOGO.png" height="100px" width="auto" />
+      <h1>Your Travel Consultant!</h1>
+    </div>
+
+    <div class="form-container">
+      <div class="toggle-btns">
+        <button id="loginBtn" class="active">Log In</button>
+        <button id="signupBtn">Sign Up</button>
+      </div>
+
+      <form name ="main" action="" id="mainForm">
+        <h2 id="formTitle">Log In</h2>
+
+        <input type="text" id="username" placeholder="Username"><br>
+        <input type="text" id="email" placeholder="Email"><br>
+        <input type="password" id="password" placeholder="Password"><br>
+
+        <input type="submit" value="Submit" onclick="doSubmit()">
+        <input type="submit" value="Clear" onclick="doClear()">
+      </form>
+    </div>
+
+    <div class="footer">
+      <h5>@WanderWho2025</h5>
+    </div>
+  </div>
+
+  <script>
+    const loginBtn = document.getElementById('loginBtn');
+    const signupBtn = document.getElementById('signupBtn');
+    const formTitle = document.getElementById('formTitle');
+    const mainForm = document.getElementById('mainForm');
+
+    let currentMode = "login";
+
+    loginBtn.onclick = () => {
+      currentMode = "login";
+      formTitle.innerText = "Log In";
+      loginBtn.classList.add("active");
+      signupBtn.classList.remove("active");
+    };
+
+    signupBtn.onclick = () => {
+      currentMode = "signup";
+      formTitle.innerText = "Sign Up";
+      signupBtn.classList.add("active");
+      loginBtn.classList.remove("active");
+    };
+
+    function doClear(){
+      document.main.username.value = "";
+      document.main.email.value = "";
+      document.main.password.value = "";
+      return;
+    }
+
+    function doSubmit(){
+
+      if (validateUser() == false) {
+        alert("Required username missing!")
+      }
+
+      if (validateEmail() == false) {
+        alert("Required email missing!")
+      }
+
+      if (validatePass() == false) {
+        alert("Required password missing!")
+        return true;
+      }
+
+      x = alert("Welcome to Wander Who, " + document.main.username.value + "!");
+    }
+
+    function validateUser() {
+      var username = document.main.username.value;
+      if (username.length == 0) return false;
+      return true;
+    }
+
+    function validateEmail() {
+      var email = document.main.email.value;
+      if (email.length == 0) return false;
+      return true;
+    }
+
+    function validatePass() {
+      var password = document.main.password.value;
+      if (password.length == 0) return false;
+      return true;
+    }
+  </script>
+</body>
+</html>

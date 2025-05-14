@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wander Who: Your Travel Consultant</title>
+
+<style>
+
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    @font-face {
+        font-family: "Neue Montreal Reg";
+        src: url(NeueMontreal-Regular.otf);
+    }
+
+    @font-face {
+        font-family: "Neue Montreal Bold";
+        src: url(NeueMontreal-Bold.otf);
+    }
+
+    @font-face {
+        font-family: "Neue Montreal Bold Italic";
+        src: url(NeueMontreal-BoldItalic.otf);
+    }
+
+    .nav {
+      position: fixed;
+      background-color: #083D77;
+      top: 10px;
+      left:25%;
+      right: 25%;
+      width: 50%;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      border-radius: 25px;
+      z-index: 1;
+    }
+
+    .navtxt {
+        color: rgb(191, 223, 252);
+        padding: 16px 16px;
+        border-radius: 50px;
+        text-decoration: none;
+        transition: 0.5s;
+        font-family: "Neue Montreal Bold";
+    }
+
+    .navtxt a:hover {
+        background-color: #135dac70;
+        color: aliceblue;
+        padding: 10px;
+        cursor: pointer;
+        font-size: 18px;
+    }
+
+    .navtxt a:visited, .navtxt a:link {
+        color: rgb(191, 223, 252);
+        padding: 16px 16px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.5s;
+        font-family: "Neue Montreal Bold";
+    }
+    
+    .navlogo {
+        transition: 0.5s;
+    }
+
+    .navlogo:hover {
+        scale: 105%;
+        cursor: pointer;
+        background-color: #135dac70;
+        padding: 1px 1px;
+        border-radius: 40px;
+        scale: 102%;
+    }
+
+    .content {
+        display: grid;
+        margin: 90px auto auto auto;
+        width: 1380px;
+        grid-template-columns: 640px 100px 640px;
+        grid-template-rows: 350px 50px 70px 400px;
+        grid-template-areas: 
+        "header header header"
+        "divider divider divider"
+        "text text text"
+        "body1 body2 body3"
+        ;
+        row-gap: 10px;
+        column-gap: 2px;
+    }
+
+    .header {
+        display: flex;
+        grid-area: header;
+        overflow: hidden;
+        height: 350px;
+        border-radius: 25px;
+        background-image: url(home\ page\ 1.png);
+        position: relative;
+        flex-direction: row;
+        justify-content: space-between;
+        opacity: 0;
+        animation: rise 2s ease-out forwards;
+    }
+
+    @keyframes rise {
+        0% {
+            transform: translateY(-50px);
+            opacity: 0.5;
+        }
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    #planefull {
+        position: relative;
+        width: auto;
+        height: 450px;
+        animation: slideUpPlane 2s ease-out forwards;
+    }
+
+    @keyframes slideUpPlane {
+        0% {
+            top: 500px;
+            right: 55px;
+        }
+        100% {
+            top: -40px;
+            right: 55px;
+        }
+    }
+    
+    .title {
+        font-family: "Neue Montreal Bold";
+        font-size: 60px;
+        margin-top: 10px;
+        margin-left: 100px;
+        color: aliceblue;
+        width: 750px;
+        word-break: break-all;
+        -webkit-text-stroke: 1px #073668;
+        animation: titleslideUp 1.5s ease-out forwards;
+        position: relative;
+        line-height: 50px;
+    }
+
+    @keyframes titleslideUp {
+        0% {
+            top: 400px;
+        }
+        100% {
+            top: 10px;
+        }
+    }
+
+    .subtitle {
+        font-family: "Neue Montreal Bold";
+        font-size: 30px;
+        margin-top: 40px;
+        margin-left: 100px;
+        color: #073668;
+        animation: subtitleslideUp 1s ease-out forwards;
+        position: relative;
+    }
+
+    @keyframes subtitleslideUp {
+        0% {
+            top: 400px;
+        }
+        100% {
+            top: 5px;
+        }
+    }
+
+    .desc {
+        font-family: "Neue Montreal Reg";
+        font-size: 20px;
+        margin-top: 50px;
+        margin-left: 100px;
+        color: #073668;
+        width: 650px;
+        animation: descslideUp 2s ease-out forwards;
+        position: relative;
+    }
+
+    @keyframes descslideUp {
+        0% {
+            top: 200px;
+        }
+        100% {
+            top: 5px;
+        }
+    }
+
+    .divider {
+        display: grid;
+        grid-area: divider;
+    }
+
+    hr.rounded {
+        border-top: 2px solid #083D77;
+        border-radius: 5px;
+        align-self: center;
+        transform-origin: center;
+        animation: openup 2s ease-out forwards;
+    }
+
+    @keyframes openup {
+        0% {
+            transform: scaleX(0);
+        }
+        100% {
+            transform: scaleX(1);
+        }   
+    }
+
+    .text {
+        display: grid;
+        grid-area: text;
+        font-family: "Neue Montreal Bold Italic";
+        font-size: 50px;
+        align-self: center;
+        color:#073668;
+        position: relative;
+        animation: slideup 1s ease-out forwards;
+        opacity: 0;
+        transform-origin: left;
+    }
+
+    @keyframes slideup {
+        0% {
+            opacity: 0;
+            top: 50px;
+
+        }
+        100% {
+            opacity: 1;
+            top: 10px;
+        }
+    }
+
+    .body1 {
+        display: flex;
+        grid-area: body1;
+        flex-direction: column;
+        gap: 10px;
+        animation: rise 1.5s ease-out forwards;
+    }
+
+    .hk, .hk a:link, .hk a:visited {
+        overflow: hidden;
+        width: 640px;
+        height: 250px;
+        border-radius: 25px;
+        background-image: url(hk\ bg1.png);
+        background-position: 100% 60%;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        transition: 1s;
+        text-decoration: none;
+    }
+
+    .hk :hover {
+        scale: 102%;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    #hktitle {
+        font-family: "Neue Montreal Bold";
+        font-size: 50px;
+        color: aliceblue;
+        text-shadow: 0px 0px 10px black;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        animation: titleslideUp 1.5s ease-out forwards;
+        text-decoration: none;
+    }
+
+    #hksub {
+        font-family: "Neue Montreal Bold Italic";
+        font-size: 30px;
+        color: aliceblue;
+        text-shadow: 0px 0px 10px black;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        animation: subtitleslideUp 1.7s ease-out forwards;
+        text-decoration: none;
+    }
+
+    .exp {
+        font-family: "Neue Montreal Reg";
+        font-size: 18px;
+        color: #083D77;
+        width: 640px;
+        word-break: keep-all;
+        text-align: center;
+        animation: descslideUp 2s ease-out forwards;
+        position: relative;
+    }
+
+    .body2 {
+        display: grid;
+        grid-area: body2;
+        font-size: 50px;
+        font-family: "Neue Montreal Bold Italic";
+        align-self: center;
+        color:#073668;
+        margin:auto;
+        margin-top: 95px;
+        text-shadow: 0px 0px 25px #1e548f;
+        animation: rise 1.5s ease-out forwards;
+    }
+
+    .body3 {
+        display: flex;
+        grid-area: body3;
+        flex-direction: column;
+        gap: 10px;
+        animation: rise 1.5s ease-out forwards;
+    }
+
+    .jp, .jp a:link, .jp a:visited{
+        overflow: hidden;
+        width: 640px;
+        height: 250px;
+        border-radius: 25px;
+        background-image: url(jp\ bg\ 1.jpg);
+        background-position: 100% 60%;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        transition: 1s;
+        text-decoration: none;
+    }
+
+    .jp a:hover {
+        scale: 102%;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    #jptitle {
+        font-family: "Neue Montreal Bold";
+        font-size: 50px;
+        color: aliceblue;
+        text-shadow: 0px 0px 10px black;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        animation: titleslideUp 1.5s ease-out forwards;
+        text-decoration: none;
+    }
+
+    #jpsub {
+        font-family: "Neue Montreal Bold Italic";
+        font-size: 30px;
+        color: aliceblue;
+        text-shadow: 0px 0px 10px rgb(0, 0, 0);
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        animation: subtitleslideUp 1.7s ease-out forwards;
+        text-decoration: none;
+    }
+
+</style>
+</head>
+<body bgcolor=#dcebff>
+<div class="nav">
+    <div class="navlogo"><a href="login.html"><img src="WanderWHO LOGO.png" width="90px" height="auto" href="login.html"></a></div>
+    <div class="navtxt"><a href="index.html">Home</a></div>
+    <div class="navtxt"><a href="family.html">Family</a></div>
+    <div class="navtxt"><a href="friends.html">Friends</a></div>
+    <div class="navtxt"><a href="prosncons.html">Pros & Cons</a></div>
+    <div class="navtxt"><a href="gallery.html">Gallery</a></div>
+</div>
+
+<div class="content">
+    <div class="header">
+        <div><p class="subtitle">Every trip has its ups and downs.</p>
+        <p class="title">You just gotta choose who's gonna be with you.</p>
+        <p class="desc">Traveling is one of the best ways to explore new cultures, try different languages, and make amazing memories. But who you travel with can change everything.</p></div>
+        <img src="planefull.png" id="planefull">
+    </div>
+    <div class="divider"><hr class="rounded"></div>
+    <div class="text">TODAY'S ARTICLE!</div>
+    <div class="body1">
+        <div class="hk">
+            <a href="friends.html">
+            <div id="hktitle">HONGKONG</div>
+            <div id="hksub">with friends!</div>
+            </a>
+        </div>
+        <div class="divider"><hr class="rounded"></div>
+        <div class="exp">Hong Kong is a special administrative region of China. With 7.4 million residents of various nationalities in a 1,104-square-kilometre territory, Hong Kong is the fourth most densely populated region in the world.</div>
+    </div>
+    <div class="body2">VS</div>
+    <div class="body3">
+        <div class="jp">
+            <a href="family.html">
+                <div id="jptitle">JAPAN</div>
+                <div id="jpsub">with family!</div>
+            </a>
+        </div>
+        <div class="divider"><hr class="rounded"></div>
+        <div class="exp">Japan is an island country in East Asia. Located in the Pacific Ocean off the northeast coast of the Asian mainland, it is bordered on the west by the Sea of Japan and extends from the Sea of Okhotsk in the north to the East China Sea in the south. </div>
+    </div>
+</div>
+
+</body>
+</html>
